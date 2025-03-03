@@ -69,4 +69,28 @@ describe('Test sum with integers and jest version', function () {
             expect(sum(row[0], row[1])).to.equal(row[2]);
         });
     });
-})
+});
+
+describe('test sum with floats', function () {
+    const testValues = [
+        { a: -2.5, b: -4.5, result: -7 },
+        { a: -2.5, b: 4.5, result: 2 },
+        { a: 2.4, b: -2.5, result: -0.1 },
+        { a: 0, b: 0, result: 0 }
+    ];
+
+    testValues.forEach(function (tc) {
+        it(`sum(${tc.a},${tc.b})=${tc.result}`, function () {
+            expect(sum(tc.a, tc.b)).to.be.closeTo(tc.result, 0.01); // you should define the tolerance inside the documentation
+            // to be within
+        });
+    });
+});
+
+describe('testing exceptions', function () {
+    it('sum(1) throws an exception "missing parameter"', function () {
+        expect(function () {
+            sum(1);
+        }).to.throw('parameter missing');
+    })
+});
